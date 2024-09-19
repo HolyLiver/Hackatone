@@ -23,14 +23,14 @@ from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from lightgbm import LGBMClassifier
 
-class Pipeline:
+class ModelCorrelation:
     
-    used_models= {"XGBoost":XGBClassifier(random_state=42), 
-        #   "GradientBoosting": GradientBoostingClassifier(random_state=42), 
-        #   "RandomForest": RandomForestClassifier(random_state=42), 
-        #   "ExtraTrees": ExtraTreesClassifier(), 
-          "LightGBM": LGBMClassifier(verbosity=-1, random_state=42)
-        #   "CatBoost": CatBoostClassifier(silent=True, random_state=42)
+    used_models= {"XGBoost":XGBClassifier(random_state=42),
+                #   "GradientBoosting": GradientBoostingClassifier(random_state=42), 
+                #   "RandomForest": RandomForestClassifier(random_state=42),
+                #   "ExtraTrees": ExtraTreesClassifier(),
+                #   "CatBoost": CatBoostClassifier(silent=True, random_state=42),
+                  "LightGBM": LGBMClassifier(verbosity=-1, random_state=42)
           }
     
     def __init__(self, logging=True) -> None:
@@ -133,7 +133,6 @@ class Pipeline:
         
         return True
 
-
     def __db_x(self, df):
         return df.drop([self.label_column], axis=1).copy() 
 
@@ -142,7 +141,6 @@ class Pipeline:
 
 
 if __name__ == "__main__":
-    pipe = Pipeline()
-    a=5
-    print(pipe.get_best_conditions(a, paths=['c:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\train_rdkit_morgan_smote.csv',
-                                    'c:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\train_rdkit_smote.csv'], label_column="g"))
+    pipe = ModelCorrelation()
+    print(pipe.get_best_conditions(paths=['c:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\train_rdkit_morgan_smote.csv',
+                                            'c:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\train_rdkit_smote.csv']))
