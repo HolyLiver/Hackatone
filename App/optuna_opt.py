@@ -12,7 +12,6 @@ from sklearn.metrics import roc_auc_score
 class Optuna_optimization:
     def __init__(self, label_column="Y") -> None:
         self.label_column = label_column
-        pass
 
     def get_best_model(self, features, file_path):
         self.features = features
@@ -68,7 +67,7 @@ class Optuna_optimization:
         return model
     
 
-
-file_path = "C:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\train_rdkit_smote.csv"
-features = ['property', 'SlogP_VSA8', 'fr_nitro', 'TPSA', 'SlogP_VSA10', 'fr_nitroso', 'VSA_EState3', 'PEOE_VSA10', 'PEOE_VSA14', 'PEOE_VSA1', 'SlogP_VSA3', 'VSA_EState4', 'BCUT2D_MWHI', 'SMR_VSA5', 'SMR_VSA10', 'SMR_VSA4', 'VSA_EState5', 'EState_VSA1', 'BCUT2D_LOGPLOW', 'fr_epoxide', 'EState_VSA2', 'MaxPartialCharge']
-best_model = Optuna_optimization().get_best_model(file_path=file_path, features=features)
+# if __name__ == "__main__":
+#     file_path = "C:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\train_rdkit_smote.csv"
+#     features = ['property', 'SlogP_VSA8', 'fr_nitro', 'TPSA', 'SlogP_VSA10', 'fr_nitroso', 'VSA_EState3', 'PEOE_VSA10', 'PEOE_VSA14', 'PEOE_VSA1', 'SlogP_VSA3', 'VSA_EState4', 'BCUT2D_MWHI', 'SMR_VSA5', 'SMR_VSA10', 'SMR_VSA4', 'VSA_EState5', 'EState_VSA1', 'BCUT2D_LOGPLOW', 'fr_epoxide', 'EState_VSA2', 'MaxPartialCharge']
+#     best_model = Optuna_optimization().get_best_model(file_path=file_path, features=features)

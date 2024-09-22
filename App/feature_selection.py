@@ -16,12 +16,13 @@ import matplotlib.pyplot as plt
 
 
 class FeatureSelection:
-    def __init__(self, file_path, label_column="Y",logging=True) -> None:
-        self.file_path =  file_path
+    def __init__(self) -> None:
+        pass
+        
+    def get_opt_features_number(self,file_path, search_step_percent=5, label_column="Y", logging=True):
+        self.file_path = file_path
         self.label_column = label_column
         self.__download_df()
-    
-    def get_opt_features_number(self, search_step_percent=5):
         self.search_step_percent = search_step_percent
         self.importance_rating = self.get_feature_importance()
         x_length  = len(self.df_x.columns)
@@ -47,7 +48,7 @@ class FeatureSelection:
         y_rolling_mean = np.convolve(y, np.ones(window_size)/window_size, mode='valid')
 
         # Определение точки, где график выходит на плато
-        plateau_threshold = 0.95 * np.max(y_rolling_mean)
+        plateau_threshold = 0.99* np.max(y_rolling_mean)
         plateau_idx = np.where(y_rolling_mean >= plateau_threshold)[0][0] + window_size//2
         plateau_x = x[plateau_idx]
         print(plateau_idx, plateau_x)
@@ -101,8 +102,8 @@ class FeatureSelection:
             .reset_index(drop=True)
         )
 
-
-path_for_dataset = "C:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\train_rdkit_smote.csv"
-f_selection = FeatureSelection(path_for_dataset)
-aaa = f_selection.get_opt_features_number()
-print(aaa)
+# if __name__ == "main":
+#     path_for_dataset = "C:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\Datasets\\train_rdkit_smote.csv"
+#     f_selection = FeatureSelection(path_for_dataset)
+#     aaa = f_selection.get_opt_features_number()
+#     print(aaa)
