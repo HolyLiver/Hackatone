@@ -63,7 +63,7 @@ class Optuna_optimization:
         y_pred_proba = model.predict_proba(X_test)
         roc = roc_auc_score(y_test, y_pred_proba[:,1])
         print(roc)
-        model.save_model(fname = "FH_descr_RFE_20_CV", format="cbm")
+        model.save_model(fname = "Final_model/FH_descr_RFE_20_CV", format="cbm")
         return model
     
 
