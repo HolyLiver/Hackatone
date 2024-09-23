@@ -1,6 +1,7 @@
 # Hackatone
 ADMET prediction 
 
+This project was carried out as part of the ADMET hackathon based on Kaggle. We knew the smiles representations of molecules, one physico-chemical property, and the target property that needed to be predicted was known only for the training dataset. In order to preserve confidentiality, we were not informed which property we predicted. The goal was to create a machine learning classification model. The assessment of the consistency of the model was carried out on Kaggle - we compared the probability of the first class calculated by us with the probability of the first class lying on Kaggle.
 
 ## App
 The folder that contains the code submitted .py files.
