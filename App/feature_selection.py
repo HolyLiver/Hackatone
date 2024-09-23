@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 
 class FeatureSelection:
-    def __init__(self) -> None:
+    def __init__(self, logging = True) -> None:
         pass
         
     def get_opt_features_number(self,file_path, search_step_percent=5, label_column="Y", logging=True):
