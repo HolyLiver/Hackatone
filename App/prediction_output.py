@@ -7,7 +7,7 @@ import inspect, os
 
 
 class Form_result():
-    def __init__(self, test_path_file, train_path_file, features_list, model_path, label_column="Y") -> None:
+    def __init__(self, test_path_file, train_path_file, features_list, model_path, label_column="Y", logging = True) -> None:
         self.test_path_file = test_path_file
         self.train_path_file = train_path_file
         self.features_list = features_list
