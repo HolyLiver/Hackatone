@@ -31,7 +31,7 @@ class FeatureSelection:
         plato_point_1 =self.opt_number_determination(result_1)
         result_2 = self.features_drop_cycle(plato_point_1-step, plato_point_1+step+1, 1)
         plato_point_2 =self.opt_number_determination(result_2)
-        print(plato_point_2)
+        print(f"Best result achieved with {plato_point_2} the most important descriptors")
         return self.importance_df["feature_name"].tolist()[:plato_point_2]
     
     def __download_df(self):
@@ -51,7 +51,7 @@ class FeatureSelection:
         plateau_threshold = 0.99* np.max(y_rolling_mean)
         plateau_idx = np.where(y_rolling_mean >= plateau_threshold)[0][0] + window_size//2
         plateau_x = x[plateau_idx]
-        print(plateau_idx, plateau_x)
+        # print(plateau_idx, plateau_x)
         return plateau_x
 
     def features_drop_cycle(self, begin, end, step):
@@ -83,7 +83,7 @@ class FeatureSelection:
             result["n_feature"].append(end)
             result["features"].append(self.importance_df["feature_name"].tolist())
             result["AUC-ROC"].append(roc_auc)
-        print(result["AUC-ROC"])
+        # print(result["AUC-ROC"])
         return result
         
 

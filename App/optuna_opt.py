@@ -11,9 +11,10 @@ from sklearn.metrics import roc_auc_score
 
 class Optuna_optimization:
     def __init__(self, label_column="Y", logging = True) -> None:
-        self.label_column = label_column
+        self.label_column = label_column        
 
-    def get_best_model(self, features, file_path):
+    def get_best_model(self, trials, features, file_path):
+        self.trials = trials
         self.features = features
         self.file_path = file_path
         df = pd.read_csv(file_path)
@@ -53,7 +54,7 @@ class Optuna_optimization:
     def set_trials(self):
         study_1 = optuna.create_study(direction="maximize", study_name="CB regressor")
         func = lambda trial: self.CB_objective(trial)
-        study_1.optimize(func, n_trials=100)
+        study_1.optimize(func, n_trials=self.trials)
         self.best_params = study_1.best_params
     
     def save_model(self):
@@ -62,8 +63,8 @@ class Optuna_optimization:
         model.fit(X_train, y_train)
         y_pred_proba = model.predict_proba(X_test)
         roc = roc_auc_score(y_test, y_pred_proba[:,1])
-        print(roc)
-        model.save_model(fname = "Final_model/FH_descr_RFE_20_CV", format="cbm")
+        print(f"AUC-ROC value for the model on train dataset: {roc}")
+        model.save_model(fname = "Final_model/final_model", format="cbm")
         return model
     
 

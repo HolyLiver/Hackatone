@@ -28,10 +28,11 @@ class Form_result():
     def get_answer_df(self):
         model = CatBoostClassifier()
         model.load_model(self.model_path)
-        print("Model has been loaded")
+        print("Model has been loaded successfully")
         y_proba = model.predict_proba(self.X_sc)[:,1]
         self.df_answer = pd.DataFrame(y_proba, columns=[self.label_column])
-        self.df_answer.to_csv("Final_model/proba.csv")
+        self.df_answer.to_csv("Final_model/answer.csv")
+        print("Dataset has been saved successfully")
 
 # test_path = "C:\\Users\\User\\OneDrive\\Документы\\Python\\Hackatone\\database\\test_rdkit.csv"
 # features = ['property', 'SlogP_VSA8', 'fr_nitro', 'TPSA', 'SlogP_VSA10', 'fr_nitroso', 'VSA_EState3', 'PEOE_VSA10', 'PEOE_VSA14', 'PEOE_VSA1', 'SlogP_VSA3', 'VSA_EState4', 'BCUT2D_MWHI', 'SMR_VSA5', 'SMR_VSA10', 'SMR_VSA4', 'VSA_EState5', 'EState_VSA1', 'BCUT2D_LOGPLOW', 'fr_epoxide', 'EState_VSA2', 'MaxPartialCharge']
