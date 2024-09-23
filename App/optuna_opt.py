@@ -10,7 +10,7 @@ from sklearn.metrics import roc_auc_score
 
 
 class Optuna_optimization:
-    def __init__(self, label_column="Y") -> None:
+    def __init__(self, label_column="Y", logging = True) -> None:
         self.label_column = label_column
 
     def get_best_model(self, features, file_path):
