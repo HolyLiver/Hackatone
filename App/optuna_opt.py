@@ -53,7 +53,7 @@ class Optuna_optimization:
     def set_trials(self):
         study_1 = optuna.create_study(direction="maximize", study_name="CB regressor")
         func = lambda trial: self.CB_objective(trial)
-        study_1.optimize(func, n_trials=3)
+        study_1.optimize(func, n_trials=100)
         self.best_params = study_1.best_params
     
     def save_model(self):
