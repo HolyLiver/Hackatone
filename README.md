@@ -19,7 +19,7 @@ The folder containing the databases. Initial databases and databases that includ
 ## Final_model
 A folder containing an impression of the final model and a table of values predicted on the test.
 
-- FH_descr_RFE_32_CV - dataset with the selection of descriptors
+- FH_descr_RFE_CV - dataset with the selection of descriptors
 - answer.csv - dataset with answers for the final/test dataset
 - final_model - impression of the final model
 
