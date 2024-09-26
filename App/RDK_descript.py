@@ -1,4 +1,6 @@
-! pip install rdkit
+import pip
+pip install rdkit
+import rdkit
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.DataStructs.cDataStructs import ConvertToNumpyArray
@@ -7,7 +9,8 @@ import pandas as pd
 from rdkit.Chem import Descriptors, MolFromSmiles
 import matplotlib.pyplot as plt
 import seaborn as sns
-! pip install mordred
+pip install mordred
+import mordred
 from mordred import Calculator, descriptors
 import imblearn
 from imblearn.over_sampling import SMOTE
@@ -15,21 +18,26 @@ import os
 
 
 def get_rdkit(df):
-    computed_descriptors = Chem.Descriptors.descList
-    for descriptor in computed_descriptors:
-        name = descriptor[0]
-        df[name] = df["Drug"].apply(lambda x: descriptor[1](MolFromSmiles(x)))
-
+    try:
+        computed_descriptors = Chem.Descriptors.descList
+        for descriptor in computed_descriptors:
+            name = descriptor[0]
+            df[name] = df["Drug"].apply(lambda x: descriptor[1](MolFromSmiles(x)))
+    except Exception as e:
+        print("Error:", type(e).__name__)
 
 def get_morgan(df, radius=2, nBits=1024):
-    df['Morgan'] = df['Drug'].apply(
-        lambda x: AllChem.GetMorganFingerprintAsBitVect(Chem.MolFromSmiles(x), radius=radius, nBits=nBits))
-    for i in range(nBits):
-        df[f'Bit_{i}'] = df['Morgan'][0][i]
+    try:
+        df['Morgan'] = df['Drug'].apply(
+            lambda x: AllChem.GetMorganFingerprintAsBitVect(Chem.MolFromSmiles(x), radius=radius, nBits=nBits))
+        for i in range(nBits):
+            df[f'Bit_{i}'] = df['Morgan'][0][i]
 
-    df_new = df.drop(['Morgan'], axis=1)
-    df_new = df_new.drop(['Drug'], axis=1)
-    return df_new
+        df_new = df.drop(['Morgan'], axis=1)
+        df_new = df_new.drop(['Drug'], axis=1)
+        return df_new
+    except Exception as e:
+        print("Error:", type(e).__name__)
 
 dir_name = os.path.split(os.getcwd())[0]
 train = pd.read_csv(f"{dir_name}\\Hackatone\\Datasets\\train_admet.csv", sep =",")

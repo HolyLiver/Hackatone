@@ -17,23 +17,26 @@ import os
 """Расчет дескрипторов Mordred"""
 
 def calc_mordred(df):
-    calc = Calculator(descriptors, ignore_3D=False)
+    try:
+        calc = Calculator(descriptors, ignore_3D=False)
 
-    mols = df['Drug'].apply(lambda mol: Chem.MolFromSmiles(mol))
-    mordred = calc.pandas(mols)
-    mordred_desc = mordred.columns.values.tolist()
+        mols = df['Drug'].apply(lambda mol: Chem.MolFromSmiles(mol))
+        mordred = calc.pandas(mols)
+        mordred_desc = mordred.columns.values.tolist()
 
-    numeric_columns = []
-    for col in mordred.columns:
-        if mordred[col].dtype in ('int64', 'float64'):
-            numeric_columns.append(col)
+        numeric_columns = []
+        for col in mordred.columns:
+            if mordred[col].dtype in ('int64', 'float64'):
+                numeric_columns.append(col)
 
-    for descriptor in numeric_columns:
-        df[descriptor] = mordred[descriptor]
+        for descriptor in numeric_columns:
+            df[descriptor] = mordred[descriptor]
 
-    df_new = df.drop(['Drug'], axis = 1)
+        df_new = df.drop(['Drug'], axis = 1)
 
-    return df_new
+        return df_new
+    except Exception as e:
+        print("Error:", type(e).__name__)
 
 def get_mordred(df, other_df = None):
 
